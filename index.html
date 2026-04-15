@@ -3,20 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>To Do List</title>
+    <title>To-Do App</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-    <div class="main-box">
-        <h1 class="headline"> My To-Do List</h1>
-        <input type="text" id="input" placeholder="Write your Work">
-            <button id="add-btn">Add Task</button>
-        <ol class="list">
-        </ol>
-        <footer>
-            <p>Copyright &copy; 2026 My To-Do List. All rights reserved.</p>
-        </footer>
-    </div>
-    <script src="script.js"></script>
+    <main>
+
+        <!-- INPUT CONTAINER -->
+        <div class="input-container">
+            <h1>To-Do List</h1>
+            <input type="text" id="taskInput" placeholder="Enter task">
+            <button id="addBtn" type="button">Add Task</button>
+        </div>
+        <!-- PENDING TASKS BOX -->
+        <div id="pending" class="task-section">
+            <h2>Pending Tasks</h2>
+            <h4>Time Out</h4>
+            <ol id="list"></ol>
+        </div>
+        <!-- COMPLETED TASKS BOX -->
+        <div id="completed" class="task-section">
+            <h2>Completed Tasks</h2>
+            <ol id="completedList"></ol>
+            <button class="delete">Delete Selected</button>
+        </div>
+        <!-- PENDING ITEM TEMPLATES -->
+        <template id="listItemTemplate">
+            <li class="list-item">
+                <button class="edit">✏️</button>
+                <span class="task"></span>
+                <select class="time-out" type="number" >
+                    <option value="0">Your Time</option>
+                    <option value="5">5 Seconds</option>
+                    <option value="6">6 Seconds</option>
+                    <option value="7">7 Seconds</option>
+                    <option value="8">8 Seconds</option>
+                    <option value="9">9 Seconds</option>
+                    <option value="10">10 Seconds</option>
+                </select>            
+            </li>
+        </template>
+        <!-- COMPLETED ITEM TEMPLATE -->
+        <template id="completedItemTemplate">
+            <li class="list-item completed">
+                <input type="checkbox" class="checkbox">
+                <span class="task"></span>
+            </li>
+        </template>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 To-Do App. All rights reserved. Bhawesh Sharma</p>
+    </footer>
+
+    <script src="script1.js"></script>
 </body>
 </html>
