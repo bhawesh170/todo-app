@@ -1,19 +1,30 @@
 
 // DOM REFERENCES
+const inputContainer = document.querySelector('.input-container');
 const input = document.getElementById('taskInput');
 const addBtn = document.getElementById('addBtn');
 const list = document.getElementById('list');
 const completedList = document.getElementById('completedList');
 const pendingTemplate = document.getElementById('listItemTemplate');
 const completedTemplate = document.getElementById('completedItemTemplate');
+const warning = document.getElementById('warning');
 
 // HELPERS
 
 function formatTask(value) {
   value = value.trim();
-  if (!value) return '';
-  return value.charAt(0).toUpperCase() + value.slice(1);
-}
+
+    if (!value) {
+      if (!warning.textContent) {
+        warning.textContent = 'Task cannot be empty.';
+        warning.style.color = 'yellow';
+      }
+      return null;
+    } else {
+      warning.textContent = '';
+      return value.charAt(0).toUpperCase() + value.slice(1);
+    }
+  }
 
 function createTask(taskText) {
   const newItem = pendingTemplate.content.cloneNode(true);
@@ -123,15 +134,32 @@ list.addEventListener('click', (event) => {
   }
 });
 
+// DELETE COMPLETED
+
 const deleteBtn = document.querySelector('.delete');
+const completeSection = document.getElementById('completed');
+let errMeassage = document.createElement('p');
 deleteBtn.addEventListener('click', () => {
   const checkboxes = completedList.querySelectorAll('.checkbox');
-    checkboxes.forEach(checkbox => {
-        if (checkbox.checked) {
-            checkbox.closest('.list-item').remove();
+  checkboxes.forEach(checkbox => {
+      if (!checkbox.checked) { 
+        if (!errMeassage.textContent) { // Show error message only if it doesn't already exist
+            errMeassage.textContent = 'Please select the tasks you want to delete.';
+            errMeassage.style.color = 'red';
+            errMeassage.style.fontSize = '14px';
+            errMeassage.style.marginTop = '10px';
+            completeSection.appendChild(errMeassage);
+
+        } else return;          
+                      
+        } else {errMeassage.textContent = ''; // Clear error message if any
+          checkbox.closest('.list-item').remove();
+          completeSection.querySelectorAll('p')?.remove(); // Remove error message if exists 
         }
-    });
-    updateVisibility();
+      });
+      setInterval(() => {
+      updateVisibility()}, 100);
 });
 
-updateVisibility();
+// updateVisibility();
+
