@@ -21,6 +21,8 @@ main {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+/* ADD TASK CONTAINER */
+
 .input-container {
     display: flex;
     flex-direction: column;
@@ -43,11 +45,18 @@ main {
     background-color: #007bff;
     color: white;
     cursor: pointer;
-    font-size: 17px;
+    font-size: 18px;
+    transition: all 0.3s ease;
 }
 
 #addBtn:hover {
-    background-color: #0056b3;
+    transform: scale(0.9);
+    background-color: #321ee3;
+}
+
+.warning {
+    font-size: 16px;
+    margin-top: 5px;
 }
 
 .task-section {
